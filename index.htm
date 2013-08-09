@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>密码生成器</title>
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#createPassword').click(function() {
+			// 大写字母
+			var uppercases = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			// 小写字母
+			var lowercases = 'abcdefghijklmnopqrstuvwxyz';
+			// 特殊符号
+			var symbols = '`-=[]\\;\',./~!@#$%^&*()_+{}|:\"<>?';
+			// 数字
+			var numbers = '0123456789';
+
+			var uppercaseCount = 0;
+			var lowercaseCount = 0;
+			var symbolCount = 0;
+			var numberCount = 0;
+
+			uppercaseCount = parseInt($('#uppercaseCountValue').val());
+			lowercaseCount = parseInt($('#lowercaseCountValue').val());
+			symbolCount = parseInt($('#symbolCountValue').val());
+			numberCount = parseInt($('#numberCountValue').val());
+
+			var password = '';
+			var i = 0;
+			var j = 0;
+
+			for (i = 0; i < uppercaseCount; i++) {
+				var address = Math.floor(Math.random() * uppercases.length);
+				var current = uppercases[address];
+				var has = false;
+				for (j = 0; j < password.length; j++) {
+					if (current == password[j]) {
+						has = true;
+						break;
+					}
+				}
+				if (has) {
+					i--;
+				} else {
+					password += current;
+				}
+			}
+			for (i = 0; i < lowercaseCount; i++) {
+				var address = Math.floor(Math.random() * lowercases.length);
+				var current = lowercases[address];
+				var has = false;
+				for (j = 0; j < password.length; j++) {
+					if (current == password[j]) {
+						has = true;
+						break;
+					}
+				}
+				if (has) {
+					i--;
+				} else {
+					password += current;
+				}
+			}
+			for (i = 0; i < symbolCount; i++) {
+				var address = Math.floor(Math.random() * symbols.length);
+				var current = symbols[address];
+				var has = false;
+				for (j = 0; j < password.length; j++) {
+					if (current == password[j]) {
+						has = true;
+						break;
+					}
+				}
+				if (has) {
+					i--;
+				} else {
+					password += current;
+				}
+			}
+			for (i = 0; i < numberCount; i++) {
+				var address = Math.floor(Math.random() * numbers.length);
+				var current = numbers[address];
+				var has = false;
+				for (j = 0; j < password.length; j++) {
+					if (current == password[j]) {
+						has = true;
+						break;
+					}
+				}
+				if (has) {
+					i--;
+				} else {
+					password += current;
+				}
+			}
+
+			var randomPassword = '';
+			for (i = 0; i < password.length; i++) {
+				var address = Math.floor(Math.random() * password.length);
+				var current = password[address];
+				var has = false;
+				for (j = 0; j < randomPassword.length; j++) {
+					if (current == randomPassword[j]) {
+						has = true;
+						break;
+					}
+				}
+				if (has) {
+					i--;
+				} else {
+					randomPassword += current;
+				}
+			}
+
+			$('#passwordValue').val(randomPassword);
+		});
+	});
+</script>
+</head>
+<body>
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr style="height: 30px">
+				<td style="text-align: right; width: 200px">大写字母数量：</td>
+				<td style="width: 300px"><input type="text" id="uppercaseCountValue" value="3" style="width: 280px" /></td>
+				<td style="text-align: right; width: 200px">小写字母数量：</td>
+				<td style="width: 300px"><input type="text" id="lowercaseCountValue" value="3" style="width: 280px" /></td>
+			</tr>
+			<tr style="height: 30px">
+				<td style="text-align: right">特殊字符数量：</td>
+				<td><input type="text" id="symbolCountValue" value="2" style="width: 280px" /></td>
+				<td style="text-align: right">数字数量：</td>
+				<td><input type="text" id="numberCountValue" value="2" style="width: 280px" /></td>
+			</tr>
+			<tr style="height: 80px">
+				<td style="text-align: right">密码：</td>
+				<td colspan="3"><input type="text" id="passwordValue" style="width: 780px; height: 70px; font-size: 32pt; font-family: Consolas, Monospace, Monaco" /></td>
+			</tr>
+			<tr style="height: 30px">
+				<td style="text-align: right"></td>
+				<td colspan="3"><input type="button" id="createPassword" value="创建" /></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
